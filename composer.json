@@ -1,0 +1,22 @@
+{
+    "name": "super-kernel/framework",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "SuperKernel\\Framework\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "wheakerd",
+            "email": "wheakerd@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "super-kernel/di": "^1.0",
+        "super-kernel/context": "^1.0",
+        "super-kernel/config": "^1.0"
+    }
+}
