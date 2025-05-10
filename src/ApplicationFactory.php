@@ -19,7 +19,7 @@ final class ApplicationFactory
 	public function __invoke(): ApplicationInterface
 	{
 		if (!ApplicationContext::hasContainer()) {
-			ApplicationContext::setContainer(new class extends AbstractContainerFactory {
+			ApplicationContext::setContainer(new readonly class extends AbstractContainerFactory {
 				protected function getDependencies(): array
 				{
 					return $this->composer?->getDependencies() ?? new ConfigProvider()()['dependencies'];

@@ -16,6 +16,9 @@ final class ConfigProvider
 	public function __invoke(): array
 	{
 		return [
+			'paths'        => [
+				__DIR__,
+			],
 			'dependencies' => [
 				ComposerInterface::class    => ComposerFactory::class,
 				ApplicationInterface::class => ApplicationFactory::class,
