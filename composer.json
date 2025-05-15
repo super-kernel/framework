@@ -7,6 +7,11 @@
             "SuperKernel\\Framework\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
     "authors": [
         {
             "name": "wheakerd",
@@ -18,5 +23,18 @@
         "super-kernel/di": "^1.0",
         "super-kernel/context": "^1.0",
         "super-kernel/config": "^1.0"
+    },
+    "require-dev": {
+        "super-kernel/composer-plugin": "^1.0"
+    },
+    "config": {
+        "allow-plugins": {
+            "super-kernel/composer-plugin": true
+        }
+    },
+    "extra": {
+        "super-kernel": {
+            "bin": "Tests\\Application"
+        }
     }
 }

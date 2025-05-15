@@ -4,9 +4,10 @@ declare(strict_types=1);
 namespace SuperKernel\Framework;
 
 use Psr\Container\ContainerInterface;
+use SuperKernel\Config\ProviderConfigFactory;
 use SuperKernel\Context\ApplicationContext;
 use SuperKernel\Contract\ApplicationInterface;
-use SuperKernel\Contract\ComposerInterface;
+use SuperKernel\Contract\ProviderConfigInterface;
 use SuperKernel\Di\Abstract\AbstractContainerFactory;
 use SuperKernel\Di\Container;
 
@@ -22,15 +23,15 @@ final class ApplicationFactory
 			ApplicationContext::setContainer(new readonly class extends AbstractContainerFactory {
 				protected function getDependencies(): array
 				{
-					return $this->composer?->getDependencies() ?? new ConfigProvider()()['dependencies'];
+					return new ProviderConfigFactory()()->getDependencies();
 				}
 
 				public function __invoke(): ContainerInterface
 				{
 					$container = new Container($this);
 
-					return null === $this->composer
-						? new self($container->get(ComposerInterface::class))()
+					return null === $this->providerConfig
+						? new self($container->get(ProviderConfigInterface::class))()
 						: $container;
 				}
 			}());
