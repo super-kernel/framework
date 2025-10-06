@@ -1,0 +1,32 @@
+{
+    "name": "super-kernel/framework",
+    "type": "library",
+    "license": "MIT",
+    "description": "The framework for super-kernel.",
+    "keywords": [
+        "php",
+        "swoole",
+        "super-kernel",
+        "framework"
+    ],
+    "authors": [
+        {
+            "name": "wheakerd",
+            "email": "wheakerd@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "SuperKernel\\Framework\\": "src/"
+        }
+    },
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=8.4",
+        "super-kernel/attribute": "*",
+        "super-kernel/contract": "*",
+        "super-kernel/event": "*",
+        "symfony/console": "^7.3",
+        "super-kernel/context": "*"
+    }
+}
