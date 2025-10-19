@@ -23,8 +23,8 @@
     "minimum-stability": "stable",
     "require": {
         "php": ">=8.4",
-        "super-kernel/attribute": "*",
-        "super-kernel/contract": "*",
+        "super-kernel/attribute": "1.1.*",
+        "super-kernel/contract": "1.1.*",
         "super-kernel/event": "*",
         "symfony/console": "^7.3",
         "super-kernel/context": "*"
