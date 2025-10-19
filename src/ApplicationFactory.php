@@ -15,7 +15,7 @@ use SuperKernel\Event\BootApplication;
 ]
 final readonly class ApplicationFactory
 {
-    public function __invoke(ApplicationInterface $application, EventDispatcherInterface $eventDispatcher): ApplicationInterface
+    public function __invoke(Application $application, EventDispatcherInterface $eventDispatcher): ApplicationInterface
     {
         $eventDispatcher->dispatch(new BootApplication());
 
