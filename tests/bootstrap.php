@@ -1,0 +1,12 @@
+<?php
+declare(strict_types=1);
+
+use SuperKernel\Attribute\Provider\AttributeCollectorProvider;
+use SuperKernel\Contract\ApplicationInterface;
+use SuperKernel\Di\Container;
+
+require __DIR__ . '/../vendor/autoload.php';
+
+$container = new Container(new AttributeCollectorProvider()());
+
+$container->get(ApplicationInterface::class)->run();
