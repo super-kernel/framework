@@ -1,0 +1,47 @@
+{
+    "name": "super-kernel/framework",
+    "description": "The framework component for super-kernel.",
+    "type": "library",
+    "license": "MIT",
+    "keywords": [
+        "php",
+        "framework",
+        "super-kernel",
+        "framework"
+    ],
+    "homepage": "https://github.com/super-kernel/framework",
+    "support": {
+        "issues": "https://github.com/super-kernel/framework/issues",
+        "source": "https://github.com/super-kernel/framework"
+    },
+    "autoload": {
+        "psr-4": {
+            "SuperKernel\\Framework\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SuperKernelTest\\Framework\\": "tests/src/"
+        }
+    },
+    "config": {
+        "classmap-authoritative": true,
+        "optimize-autoloader": true,
+        "sort‑packages": true
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "require": {
+        "php": "~8.4.0",
+        "super-kernel/attribute": "~1.0.0",
+        "super-kernel/contract": "~1.0.0"
+    },
+    "require-dev": {
+        "super-kernel/annotator": "~1.0.0",
+        "super-kernel/composer-resolver": "~1.0.0",
+        "super-kernel/di": "~1.0.0",
+        "super-kernel/event-dispatcher": "~1.0.0",
+        "super-kernel/path-resolver": "~1.0.0",
+        "super-kernel/reflector": "~1.0.0"
+    }
+}
