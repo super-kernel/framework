@@ -37,14 +37,12 @@
     "require": {
         "php": "~8.4.0",
         "super-kernel/attribute": "dev-main",
-        "super-kernel/contract": "dev-main"
-    },
-    "require-dev": {
+        "super-kernel/contract": "dev-main",
+        "super-kernel/reflector": "dev-main",
         "super-kernel/annotator": "dev-main",
         "super-kernel/composer-resolver": "dev-main",
-        "super-kernel/di": "dev-main",
         "super-kernel/event-dispatcher": "dev-main",
         "super-kernel/path-resolver": "dev-main",
-        "super-kernel/reflector": "dev-main"
+        "super-kernel/di": "dev-main"
     }
 }
