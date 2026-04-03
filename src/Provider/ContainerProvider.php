@@ -90,11 +90,7 @@ final class ContainerProvider
 
 		$annotations = new AnnotationExtractor($this->getTransientClassLoader($composerClassLoader), $reflectionCollector)->getAnnotations();
 
-		$annotationCollector = new AnnotationCollector(...$annotations);
-
-		$composerClassLoader->unregister();
-
-		return $annotationCollector;
+		return new AnnotationCollector(...$annotations);
 	}
 
 	private function getTransientClassLoader(ClassLoader $classLoader): ClassLoaderInterface

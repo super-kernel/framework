@@ -2,10 +2,14 @@
 <?php
 declare(strict_types=1);
 
+use SuperKernel\Contract\ApplicationInterface;
 use SuperKernel\Framework\ApplicationContext;
 
 include $_composer_autoload_path ?? __DIR__ . '/../vendor/autoload.php';
 
-$container = new SuperKernel\Framework\Provider\ContainerProvider()();
+(function () {
+    $container = new SuperKernel\Framework\Provider\ContainerProvider()();
 
-ApplicationContext::setContainer($container);
+    $application = ApplicationContext::setContainer($container)->get(ApplicationInterface::class);
+    $application->run();
+})();
