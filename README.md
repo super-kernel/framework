@@ -22,12 +22,12 @@ Symfony Console auto-exit behavior is preserved. Embedded callers and tests may 
 
 Paths below are relative to `src/` and the package namespace.
 
-| Directory | Responsibility |
-| --- | --- |
-| `ExceptionHandler` | `ProcessExceptionHandler`: current-process uncaught-throwable registration and termination. |
-| `Listener` | `BeforeApplicationStartListener`: registers the injected process handler during application startup. |
-| `EventDispatcher` | Symfony-to-PSR event dispatcher adaptation. |
-| `Provider` | Application construction and startup-event publication. |
+| Directory          | Responsibility                                                                                       |
+|--------------------|------------------------------------------------------------------------------------------------------|
+| `ExceptionHandler` | `ProcessExceptionHandler`: current-process uncaught-throwable registration and termination.          |
+| `Listener`         | `BeforeApplicationStartListener`: registers the injected process handler during application startup. |
+| `EventDispatcher`  | Symfony-to-PSR event dispatcher adaptation.                                                          |
+| `Provider`         | Application construction and startup-event publication.                                              |
 
 ### Public namespaces
 

@@ -29,7 +29,7 @@ final class ProcessExceptionHandler
 
     public function __invoke(Throwable $throwable): never
     {
-        $this->handle($throwable);
+        $this->exceptionDispatcher->dispatch($throwable);
 
         exit(1);
     }
