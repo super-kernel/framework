@@ -58,7 +58,7 @@ PCNTL, Process, and Exec use the package metadata restored after successful scan
 
 ## Exception handling
 
-`Application` delegates every throwable that reaches Symfony's `renderThrowable()` boundary to the shared `ExceptionDispatcherInterface`. Symfony PHP Error catching remains enabled, so command exceptions and errors enter the same exception chain while Symfony keeps its normal auto-exit and non-zero failure status.
+`Application` delegates every throwable that reaches Symfony's `renderThrowable()` boundary to the shared `ExceptionDispatcherInterface`, except Symfony Console exceptions: throwables implementing `Symfony\Component\Console\Exception\ExceptionInterface`, such as an unknown command, a missing argument, or an unknown option. Symfony renders those itself on the error output: the message, the running command's synopsis when one is running, and the exception class and trace at verbose level. Exception handlers therefore do not receive Symfony Console exceptions. Symfony PHP Error catching remains enabled, so other command exceptions and errors enter the shared exception chain, and every failure keeps Symfony's normal auto-exit and non-zero status.
 
 During `BeforeApplicationStart`, at `PHP_INT_MAX` priority before ordinary startup listeners, Framework registers `SuperKernel\Framework\ExceptionHandler\ProcessExceptionHandler` as the process's uncaught-throwable handler. It forwards otherwise-unhandled throwables to the same dispatcher and then terminates the failed process with status `1`. It does not handle warnings, recover execution, or define protocol-specific recovery actions.
 

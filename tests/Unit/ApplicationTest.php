@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace SuperKernel\Framework\Tests\Unit;
 
 use Error;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
+use RuntimeException;
 use SuperKernel\Contract\ApplicationInterface;
 use SuperKernel\Contract\ExceptionDispatcherInterface;
 use SuperKernel\Framework\Application;
@@ -19,6 +21,17 @@ use Throwable;
 
 final class ApplicationTest extends TestCase
 {
+    /** @return iterable<string, array{Throwable}> */
+    public static function nonConsoleThrowables(): iterable
+    {
+        yield 'PHP error' => [
+            new Error('Application failure.'),
+        ];
+        yield 'application exception' => [
+            new RuntimeException('Application failure.'),
+        ];
+    }
+
     /**
      * These assertions protect the public interface contract even when static types already imply it.
      *
@@ -48,9 +61,9 @@ final class ApplicationTest extends TestCase
     }
 
     /** @throws Throwable When fixture setup or the operation under test throws */
-    public function testRoutesPhpErrorsThroughTheInjectedExceptionDispatcher(): void
+    #[DataProvider('nonConsoleThrowables')]
+    public function testRoutesNonConsoleThrowablesThroughTheInjectedExceptionDispatcher(Throwable $throwable): void
     {
-        $throwable = new Error('Application failure.');
         $dispatcher = $this->createMock(ExceptionDispatcherInterface::class);
         $output = new BufferedOutput();
         $dispatcher->expects(self::once())
@@ -76,5 +89,45 @@ final class ApplicationTest extends TestCase
         ]), $output);
 
         self::assertSame(1, $status);
+    }
+
+    /** @throws Throwable When fixture setup or the operation under test throws */
+    public function testRendersUnknownCommandsAsConsoleMessagesWithoutDispatching(): void
+    {
+        $dispatcher = $this->createMock(ExceptionDispatcherInterface::class);
+        $output = new BufferedOutput();
+        $dispatcher->expects(self::never())->method('dispatch');
+
+        $application = new Application($dispatcher);
+        $application->setAutoExit(false);
+
+        $status = $application->run(new ArrayInput([
+            'command' => 'missing',
+        ]), $output);
+
+        self::assertSame(1, $status);
+        self::assertStringContainsString('Command "missing" is not defined.', $output->fetch());
+    }
+
+    /** @throws Throwable When fixture setup or the operation under test throws */
+    public function testRendersInvalidInputWithTheRunningCommandSynopsis(): void
+    {
+        $dispatcher = $this->createMock(ExceptionDispatcherInterface::class);
+        $output = new BufferedOutput();
+        $dispatcher->expects(self::never())->method('dispatch');
+
+        $application = new Application($dispatcher);
+        $application->setAutoExit(false);
+        $application->addCommand(new Command('app:run'));
+
+        $status = $application->run(new ArrayInput([
+            'command'   => 'app:run',
+            '--missing' => true,
+        ]), $output);
+        $display = $output->fetch();
+
+        self::assertSame(1, $status);
+        self::assertStringContainsString('The "--missing" option does not exist.', $display);
+        self::assertStringContainsString("\napp:run\n", $display);
     }
 }

@@ -58,7 +58,7 @@ PCNTL、Process 和 Exec 使用扫描成功后恢复的包元数据。Phar 使�
 
 ## 异常处理
 
-`Application` 把到达 Symfony `renderThrowable()` 边界的每个异常都交给共享的 `ExceptionDispatcherInterface`。Symfony 对 PHP Error 的捕获保持启用，因此命令中的异常和错误进入同一条异常处理链，同时 Symfony 保持其正常的自动退出和非零失败状态。
+`Application` 把到达 Symfony `renderThrowable()` 边界的每个异常都交给共享的 `ExceptionDispatcherInterface`，Symfony Console 异常除外：即实现了 `Symfony\Component\Console\Exception\ExceptionInterface` 的异常，例如命令不存在、缺少参数或选项不存在。这类异常由 Symfony 自己在错误输出上渲染：显示异常消息，有正在运行的命令时显示该命令的用法，在详细级别下还显示异常类名和堆栈。因此异常处理器收不到 Symfony Console 异常。Symfony 对 PHP Error 的捕获保持启用，因此命令中的其他异常和错误进入共享的异常处理链，而且每次失败都保持 Symfony 正常的自动退出和非零状态。
 
 在 `BeforeApplicationStart` 期间，Framework 以 `PHP_INT_MAX` 优先级（先于普通的启动监听器）把 `SuperKernel\Framework\ExceptionHandler\ProcessExceptionHandler` 注册为进程的未捕获异常处理器。它把其他地方没有处理的异常交给同一个分发器，然后以状态 `1` 结束失败的进程。它不处理警告、不恢复执行，也不定义协议专用的恢复动作。
 
