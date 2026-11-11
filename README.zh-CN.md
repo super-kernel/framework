@@ -64,8 +64,8 @@ php bin/bootstrap.php --version
 | --- | --- | --- |
 | `SuperKernel\Contract\ApplicationInterface` | 接口 | 从容器解析并运行；`run()` 返回退出状态。 |
 | `SuperKernel\Framework\Application` | 类 | `ApplicationInterface` 背后的 Symfony Console 应用。 |
-| `name` | 配置键 | 应用名称，取自根 `composer.json`。 |
-| `version` | 配置键 | 应用版本，取自根 `composer.json`；可省略。 |
+| `name` | Composer 键 | 应用名称，取自根 `composer.json`。 |
+| `version` | Composer 键 | 应用版本，取自根 `composer.json`；可省略。 |
 | `SuperKernel\Event\BeforeApplicationStart` | 事件 | 在应用创建之后、返回之前发布一次。 |
 | `Symfony\Contracts\EventDispatcher\EventDispatcherInterface` | 接口 | 由容器提供；把每个事件交给 PSR-14 分发器。 |
 | `SuperKernel\Framework\ExceptionHandler\ProcessExceptionHandler` | 类 | 把未被捕获的异常交给异常分发器；`handle()` 报告一个异常而不结束进程。 |

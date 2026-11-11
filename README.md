@@ -64,8 +64,8 @@ It prints `acme/billing 1.2.3`.
 | --- | --- | --- |
 | `SuperKernel\Contract\ApplicationInterface` | Interface | Resolved from the container and run; `run()` returns the exit status. |
 | `SuperKernel\Framework\Application` | Class | The Symfony Console application behind `ApplicationInterface`. |
-| `name` | Configuration key | The application name, from the root `composer.json`. |
-| `version` | Configuration key | The application version, from the root `composer.json`; optional. |
+| `name` | Composer key | The application name, from the root `composer.json`. |
+| `version` | Composer key | The application version, from the root `composer.json`; optional. |
 | `SuperKernel\Event\BeforeApplicationStart` | Event | Published once the application is created, before it is returned. |
 | `Symfony\Contracts\EventDispatcher\EventDispatcherInterface` | Interface | Provided by the container; passes every event to the PSR-14 dispatcher. |
 | `SuperKernel\Framework\ExceptionHandler\ProcessExceptionHandler` | Class | Sends throwables that nothing catches to the exception dispatcher; `handle()` reports one without ending the process. |
